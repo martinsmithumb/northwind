@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charts</title>
+</head>
+<body>
+    <table style="margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
+        <tr>
+            <td>
+                <div>
+                    <canvas id="lineChart" ></canvas>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <canvas id="scatterChart"></canvas>
+                </div>
+            </td>                           
+            <td>
+                <div>
+                    <canvas id="barChart"></canvas>
+                </div>
+            </td> 
+        <tr>
+        </tr>       
+            <td>
+                <div>
+                    <canvas id="pieChart" ></canvas>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <canvas id="bubbleChart" ></canvas>
+                </div>
+            </td>                           
+            <td>
+                <div>
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        var ctx = document.getElementById('bubbleChart').getContext('2d');
+        // For a bubble chart
+        var number = .2
+        var myBubbleChart = new Chart(ctx, {
+                type: 'bubble',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: {
+                        // X Value
+                        x: number,
+                    
+                        // Y Value
+                        y: number,
+                    
+                        // Bubble radius in pixels (not scaled).
+                        r: number
+                },
+                options: {}
+            });
+        var ctx = document.getElementById('lineChart').getContext('2d');        
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',   
+
+            // The data for our dataset
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Line Stuff',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [0, 10, 5, 2, 20, 30, 45]
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',   
+
+            // The data for our dataset
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Bar Stuff',
+                    backgroundColor: 'rgb(0, 0, 255)',
+                    borderColor: 'rgb(0, 0, 255)',
+                    data: [56, 34, 12, 23, 25, 30, 45]
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    backgroundColor: ['rgb(255, 0, 0)', 'rgb(255, 255, 0)', 'rgb(0, 0, 255)'],
+                    borderColor: 'rgb(88, 88, 88)',
+                    data: [10, 20, 30]
+                }],
+            
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Red',
+                    'Yellow',
+                    'Blue'
+                ]
+            },
+            options: {}
+        });
+
+        var ctx = document.getElementById('doughnutChart').getContext('2d');
+        var myDoughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    backgroundColor: ['rgb(255, 0, 0)', 'rgb(255, 255, 0)', 'rgb(0, 0, 255)'],
+                    borderColor: 'rgb(88, 88, 88)',
+                    data: [10, 20, 30]
+                }],
+            
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Red',
+                    'Yellow',
+                    'Blue'
+                ]
+            },
+            options: {} 
+        });
+
+        var ctx = document.getElementById('scatterChart').getContext('2d');
+        var scatterChart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Scatter Dataset',
+                    backgroundColor: 'rgb(0, 0, 0)',
+                    borderColor: 'rgb(0, 0, 0)',
+                    data: [{
+                        x: -10,
+                        y: 0
+                    }, {
+                        x: 0,
+                        y: 10
+                    }, {
+                        x: 10,
+                        y: 5
+                    }, {
+                        x: 3,
+                        y: 3
+                    }, {
+                        x: 4,
+                        y: 6
+                    }, {
+                        x: -6,
+                        y: 2
+                    }]
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom'
+                    }]
+                }
+            }
+        });
+    </script>
+    
+    
+    
+</body>
+</html>

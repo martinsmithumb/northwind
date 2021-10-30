@@ -1,0 +1,68 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Shippers {% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+      <table class="table table-responsive">
+        <tr>
+            {% if shippers %}
+                {% for shipper in shippers %}
+                    <td>
+                        <div class="card" style="width: 18rem;">
+                        <div style="height: 12rem;">
+                            <img class="card-img-top" src="{% static 'img/shippers.jpg' %}" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{shipper.company_name}}</h5>
+                            <p class="card-text">{{shipper.phone}}</p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
+                        </div>
+                    </td> 
+                {% endfor %}
+            {% endif %}
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+    <div style="margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; height: 1000px; width: 1000px;">
+            <canvas id="barChart"></canvas>
+    </div>         
+    
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',   
+
+            // The data for our dataset
+            data: {
+                labels: {{ names | safe }},
+                datasets: [{
+                    label: 'Bar Stuff',
+                    backgroundColor: 'rgb(0, 0, 255)',
+                    borderColor: 'rgb(0, 0, 255)',
+                    data: {{ counts }},
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    </script>
+
+
+
+    
+            
+
+
+{% endblock %}

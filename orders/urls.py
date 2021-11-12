@@ -5,8 +5,8 @@ from .views import OrderViewSet, ShipperViewSet
 
 
 router = routers.DefaultRouter()
-router.register('orders', OrderViewSet)
-router.register('shipper', ShipperViewSet)
+router.register('api/orders', OrderViewSet)
+router.register('api/shippers', ShipperViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -18,6 +18,27 @@ def chart(request):
 
 def shippers(request):
     shippers = Shipper.objects.all()
+    orders = Order.objects.all()
+    names = []
+    for shipper in shippers:
+        names.append(str(shipper))
+
+    order_counts = Order.objects.values('ship_via').annotate(num=Count('customer_id')) 
+
+    counts = []
+    for item in order_counts:
+        counts.append(item['num'])
+
+    context = {
+        'shippers': shippers,
+        'names': names,
+        'counts': counts,
+        'orders':  orders,
+    }
+    return render(request, 'pages/shippers.html', context)
+
+def categories(request):
+    shippers = Shipper.objects.all()
     names = []
     for shipper in shippers:
         names.append(str(shipper))
@@ -34,4 +55,3 @@ def shippers(request):
         'counts': counts,
     }
     return render(request, 'pages/shippers.html', context)
-

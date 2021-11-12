@@ -20,7 +20,14 @@
                         <div class="card-body">
                             <h5 class="card-title">{{shipper.company_name}}</h5>
                             <p class="card-text">{{shipper.phone}}</p>
-                            <a href="#" class="btn btn-primary">Details</a>
+                            <div class="row mx-md-n5" >
+                            {% for order in orders|slice:":10" %}
+                                {% if order.ship_via_id == shipper.shipper_id  %}
+                                    <div class="p-1 "><button type="button" class="btn btn-primary btn-md mx-auto">{{order.order_id}} {{order.ship_name}}</button></div>                                
+                                {% endif %}
+                            {% endfor %} 
+                            </div>           
+                            <a href="#" class="btn btn-secondary btn-sm">More Orders</a>
                         </div>
                         </div>
                     </td> 
@@ -30,7 +37,8 @@
       </table>
     </div>
   </div>
-  
+
+
     <div style="margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; height: 1000px; width: 1000px;">
             <canvas id="barChart"></canvas>
     </div>         
@@ -40,10 +48,10 @@
         
         var ctx = document.getElementById('barChart').getContext('2d');
         var barChart = new Chart(ctx, {
-            // The type of chart we want to create
+            // type of chart
             type: 'bar',   
 
-            // The data for our dataset
+            // data for dataset
             data: {
                 labels: {{ names | safe }},
                 datasets: [{
@@ -54,7 +62,7 @@
                 }]
             },
 
-            // Configuration options go here
+            // Configuration options
             options: {}
         });
     </script>

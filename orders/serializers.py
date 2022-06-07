@@ -14,7 +14,7 @@ class ShipperSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shipper
         # This is where you decide what should be included in the object sent to front end
-        fields = ['shipper_id', 'company_name', 'phone']
+        fields = '__all__'
 
 
 

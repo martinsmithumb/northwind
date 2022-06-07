@@ -55,3 +55,20 @@ def categories(request):
         'counts': counts,
     }
     return render(request, 'pages/shippers.html', context)
+
+
+def ship_populator(request):
+    shippers = Shipper.objects.all()
+    shipper_ids = []
+    company_names = []
+    
+    for shipper in shippers:
+        company_names.append(str(shipper))
+        shipper_ids.append(str(shipper.shipper_id))
+
+    context = {
+        'shippers': shippers,
+        'company_names': company_names,
+        'shipper_ids':shipper_ids,
+    }
+    return render(request, 'pages/ship_populator.html', context)

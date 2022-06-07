@@ -1,0 +1,94 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Shipper Populator {% endblock %}
+
+{% block content %}
+<div class = "p-5">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="form-outline">
+                <label class="form-label" for="typeText">Company Name</label>
+                <input list="shippers-options" onchange="term_search(this.value)" id="company-name" class="form-control" type="text" placeholder="Company Name" name="" value=""> 
+                <datalist id="shippers-options">
+                    {% for company_name in company_names %}
+                        <option value="{{ company_name }}"> 
+                    {% endfor %}
+                </datalist>           
+            </div>
+            <div class="form-outline">
+                <label class="form-label" for="typeText">Shipper ID</label>
+                <input id="shipper-id" class="form-control" type="text" placeholder="Shipper ID" name="" value="">  
+            </div>
+            <div class="form-outline">
+                <label class="form-label" for="typeText">Phone Number</label>
+                <input id="phone-number" class="form-control" type="text" placeholder="Phone Number" name="" value="">  
+            </div> 
+        </div> 
+    </div>
+</div>
+
+<div class = "p-5">
+    <div class="row justify-content-center">
+        <ul id="myUL">
+        {% for company_name in company_names %}
+            <li><a>{{ company_name }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    
+</div>
+
+
+<script>
+    // Helper function to get CSRF code to make secure AJAX requests to database.
+    // Code found in https://docs.djangoproject.com/en/3.2/ref/csrf/
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }    
+
+    function update_field(id, field_value, field){ 
+
+        let db_value = field_value // needed in order to handle dates seperately
+
+
+        
+        let post_fav_data = new FormData();
+        post_fav_data.append('id', id);                   // id of the report request
+        post_fav_data.append('field_value', db_value);    // the new value to add to db
+        post_fav_data.append('action', 'update');         // value used to hit conditional statment in views.py
+        post_fav_data.append('field', field);             // the name of the column where the new value is added
+
+        // Make POST request to update value in database:        
+        fetch("/api/shippers/", {
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            body: post_fav_data,
+            credentials: 'same-origin',
+        }).then(function(response) {
+            response.text().then(function (text) { console.log(text) });
+        });
+        
+        // Update DOM with new Value
+        field = field.replace("_","-")                               // Changing field from DB format ("_") to HTML ID format ("-")        
+        document.getElementById(field+"-"+id).innerHTML=field_value; // Changing the Value in the DOM to the new Value                        
+        toggle_form(field+"-"+id);                                   // Showing the value and hiding the form again
+
+    }; 
+
+</script>
+
+{% endblock %}

@@ -45,9 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customers.apps.CustomersConfig',
     'employees.apps.EmployeesConfig',
     'orders.apps.OrdersConfig',
+    'pages.apps.PagesConfig',
+    'products.apps.ProductsConfig',
+    'customers.apps.CustomersConfig',    
+    'shippers.apps.ShippersConfig',    
     'rest_framework',
     'django.contrib.humanize',
 ]

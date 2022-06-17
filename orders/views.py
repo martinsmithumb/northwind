@@ -13,3 +13,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 class ShipperViewSet(viewsets.ModelViewSet):
     serializer_class = ShipperSerializer
     queryset = Shipper.objects.all()
+
+def orderhome(request):
+    orders = Order.objects.all()
+    context = {'orders': orders}
+    return render(request, 'orders/orderhome.html', context)

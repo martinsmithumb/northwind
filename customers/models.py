@@ -1,7 +1,7 @@
 from django.db import models
 
 class Customer(models.Model):
-    customer_id = models.IntegerField() 
+    customer_id = models.CharField(max_length=5, primary_key=True, null=False)
     company_name = models.CharField(max_length=40, null=True)
     contact_name = models.CharField(max_length=30, null=True)
     contact_title = models.CharField(max_length=30, null=True)

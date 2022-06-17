@@ -20,10 +20,12 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('', include('pages.urls')),
-    # path('customers/', include('customers.urls')),
-    # path('employees/', include('employees.urls')),
+    path('customers/', include('customers.urls')),
+    path('employees/', include('employees.urls')),
     path('orders/', include('orders.urls')),
+    path('', include('pages.urls')),
+    path('products/', include('products.urls')),
+    path('shippers/', include('shippers.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 ]

@@ -1,7 +1,7 @@
 from django.db import models
 
 class Employee(models.Model):
-    employee_id = models.IntegerField() 
+    employee_id = models.IntegerField(primary_key=True, null=False) 
     last_name = models.CharField(max_length=20, null=True)
     first_name = models.CharField(max_length=10, null=True)
     title = models.CharField(max_length=30, null=True)

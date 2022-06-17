@@ -17,9 +17,9 @@
               <img class="card-img-top" src="{% static 'img/warehouse.jpg' %}" alt="Card image cap">
             </div>
             <div class="card-body">
-              <h5 class="card-title">Categories</h5>
+              <h5 class="card-title">Orders</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Details</a>
+              <a href="{% url 'orderhome' %}" class="btn btn-primary">Details</a>
             </div>
           </div>
         </td>
@@ -31,7 +31,7 @@
             <div class="card-body">
               <h5 class="card-title">Shippers</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="{% url 'shippers' %}" class="btn btn-primary">Details</a>
+              <a href="{% url 'shipperhome' %}" class="btn btn-primary">Details</a>
             </div>
           </div>
         </td>        
@@ -57,7 +57,7 @@
             <div class="card-body">
               <h5 class="card-title">Customers</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Details</a>
+              <a href="{% url 'customerhome' %}" class="btn btn-primary">Details</a>
             </div>
           </div>
         </td>        
@@ -69,7 +69,7 @@
             <div class="card-body">
               <h5 class="card-title">Products</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Details</a>
+              <a href="{% url 'producthome' %}" class="btn btn-primary">Details</a>
             </div>
           </div>
         </td>
@@ -81,7 +81,7 @@
             <div class="card-body">
               <h5 class="card-title">Employees</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Details</a>
+              <a href="{% url 'employeehome' %}" class="btn btn-primary">Details</a>
             </div>
           </div>
         </td>

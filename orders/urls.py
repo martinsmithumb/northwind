@@ -10,4 +10,5 @@ router.register('api/shippers', ShipperViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('orderhome', views.orderhome, name='orderhome')
 ]

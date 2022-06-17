@@ -1,18 +1,11 @@
 from django.db import models
 from customers.models import Customer
 from employees.models import Employee
-
-
-class Shipper(models.Model):
-    shipper_id = models.IntegerField(null=True) 
-    company_name = models.CharField(max_length=40, null=True)
-    phone = models.CharField(max_length=24, null=True)
-    def __str__(self):
-        return self.company_name
-
+from shippers.models import Shipper
+from products.models import Product
 
 class Order(models.Model):
-    order_id = models.IntegerField(null=True)
+    order_id = models.IntegerField(primary_key=True, null=False)
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, null=True)
     employee = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, null=True)
     order_date = models.DateField(null=True) 
@@ -28,6 +21,13 @@ class Order(models.Model):
     ship_country = models.CharField(max_length=15, null=True)    
     def __str__(self):
         return self.order_id
+
+
+class Order_line(models.Model):
+    line = models.IntegerField(primary_key=True, null=False)
+    order_id = models.ForeignKey(Order, on_delete=models.DO_NOTHING, null=True)
+    product_id = models.ForeignKey(Product, on_delete=models.DO_NOTHING, null=True)
+    quantity = models.IntegerField()
 
 
 

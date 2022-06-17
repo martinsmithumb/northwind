@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from orders.models import Shipper, Order
+from orders.models import Order
+from shippers.models import Shipper
 from django.db.models import Count
 import json
 
@@ -16,59 +17,3 @@ def chart(request):
     context = {}
     return render(request, 'pages/chart.html', context)
 
-def shippers(request):
-    shippers = Shipper.objects.all()
-    orders = Order.objects.all()
-    names = []
-    for shipper in shippers:
-        names.append(str(shipper))
-
-    order_counts = Order.objects.values('ship_via').annotate(num=Count('customer_id')) 
-
-    counts = []
-    for item in order_counts:
-        counts.append(item['num'])
-
-    context = {
-        'shippers': shippers,
-        'names': names,
-        'counts': counts,
-        'orders':  orders,
-    }
-    return render(request, 'pages/shippers.html', context)
-
-def categories(request):
-    shippers = Shipper.objects.all()
-    names = []
-    for shipper in shippers:
-        names.append(str(shipper))
-
-    orders = Order.objects.values('ship_via').annotate(num=Count('customer_id')) 
-
-    counts = []
-    for item in orders:
-        counts.append(item['num'])
-
-    context = {
-        'shippers': shippers,
-        'names': names,
-        'counts': counts,
-    }
-    return render(request, 'pages/shippers.html', context)
-
-
-def ship_populator(request):
-    shippers = Shipper.objects.all()
-    shipper_ids = []
-    company_names = []
-    
-    for shipper in shippers:
-        company_names.append(str(shipper))
-        shipper_ids.append(str(shipper.shipper_id))
-
-    context = {
-        'shippers': shippers,
-        'company_names': company_names,
-        'shipper_ids':shipper_ids,
-    }
-    return render(request, 'pages/ship_populator.html', context)

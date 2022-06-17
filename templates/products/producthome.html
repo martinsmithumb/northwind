@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Products {% endblock %}
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+      <table class="table table-responsive">
+        <tr>
+            {% if products %}
+                {% for product in products %}
+                    <td>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                            <div class="row mx-md-n5" >
+                            </div>  
+                        </div>
+                        </div>
+                    </td> 
+                {% endfor %}
+            {% endif %}
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+    <div style="margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; height: 200px; width: 1000px;">
+        <div class="col-auto">        
+            <div class="d-sm-inline-block "><canvas id="doughnutChart"></canvas></div>
+            <div class="d-sm-inline-block "><canvas id="barChart"></canvas></div>
+            <div class="d-sm-inline-block "><canvas id="lineChart"></canvas></div>             
+        </div> 
+    </div>
+</div>
+
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+      <table class="table table-responsive">
+        <tr>
+            {% if shippers %}
+                {% for shipper in shippers %}
+                    <td>
+                        <div class="card" style="width: 18rem;">
+                        <div style="height: 12rem;">
+                            <img class="card-img-top" src="{% static 'img/shippers.jpg' %}" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{shipper.company_name}}</h5>
+                            <p class="card-text">{{shipper.phone}}</p>
+                            <div class="row mx-md-n5" >
+                            </div>  
+                        </div>
+                        </div>
+                    </td> 
+                {% endfor %}
+            {% endif %}
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+
+        var ctx = document.getElementById('doughnutChart').getContext('2d');
+        var myDoughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    backgroundColor: ['rgb(255, 0, 0)', 'rgb(255, 255, 0)', 'rgb(0, 0, 255)'],
+                    borderColor: 'rgb(88, 88, 88)',
+                    data: {{ counts }},
+                }],
+            
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: {{ names | safe }}
+            },
+            options: {} 
+        });
+
+
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctx, {
+            // type of chart
+            type: 'bar',   
+
+            // data for dataset
+            data: {
+                labels: {{ names | safe }},
+                datasets: [{
+                    label: 'Orders by Shipper',
+                    backgroundColor: 'rgb(0, 0, 255)',
+                    borderColor: 'rgb(0, 0, 255)',
+                    data: {{ counts }},
+                }]
+            },
+
+            // Configuration options
+            options: {}
+        });
+
+        var ctx = document.getElementById('lineChart').getContext('2d');        
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',   
+
+            // The data for our dataset
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Trended Orders',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [0, 10, 5, 2, 20, 30, 45]
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    </script>
+
+
+{% endblock %}

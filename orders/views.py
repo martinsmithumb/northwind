@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Order, Shipper
 from rest_framework import viewsets
 from .serializers import OrderSerializer, ShipperSerializer
@@ -19,6 +19,10 @@ def orderhome(request):
     orders = Order.objects.all()
     context = {'orders': orders}
     return render(request, 'orders/orderhome.html', context)
+
+def order(request, order_id):
+    order = get_object_or_404(Order, order_id=order_id)
+    return render(request, 'orders/order.html', {'order': order})
 
 # def ordersdash(request):
 #     orders = Order.objects.all()

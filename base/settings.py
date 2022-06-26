@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'products.apps.ProductsConfig',
     'customers.apps.CustomersConfig',    
-    'shippers.apps.ShippersConfig',    
+    'shippers.apps.ShippersConfig',   
+    'suppliers.apps.SuppliersConfig', 
     'rest_framework',
     'django.contrib.humanize',
 ]

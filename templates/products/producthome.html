@@ -5,29 +5,27 @@
 {% block title %} | Products {% endblock %}
 
 {% block content %}
-
-
 <div class="row justify-content-center">
     <div class="col-auto">
-      <table class="table table-responsive">
-        <tr>
-            {% if products %}
-                {% for product in products %}
+      <table class="table table-responsive">        
+          {% if products %}
+              {% for product in products %}
+                <tr>
                     <td>
+                        <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text"></p>
+                            <h5 class="card-title">{{product.product_name}}</h5>
+                            <p class="card-text">{{product.category}}</p>
                             <div class="row mx-md-n5" >
+                              <a href="{% url 'product' product.product_id %}" class="btn btn-primary">More Info</a>
                             </div>  
                         </div>
                         </div>
                     </td> 
-                {% endfor %}
-            {% endif %}
-        </tr>
+                </tr>
+              {% endfor %}
+          {% endif %}        
       </table>
     </div>
   </div>
-
-
 {% endblock %}

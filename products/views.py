@@ -7,13 +7,10 @@ def producthome(request):
         'products': products
     }    
     return render(request, 'products/producthome.html', context)
-
-def product_list(request, category_slug=None):
-    category = None
-    categories = Category.objects.all()
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-    return render(request,
-                  'products/list.html',
-                  {'category': category,
-                   'categories': categories})
+    
+def product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    context = {
+        'product': product
+    }
+    return render(request, 'products/product.html', context)

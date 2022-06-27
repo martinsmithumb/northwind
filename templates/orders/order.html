@@ -6,35 +6,37 @@
 
 {% block content %}
 
-<div class="container-fluid mx-md center" >
-    <div class="card" style="width: 30rem;">
-        <table class="table">
-                <tr>
-                    <td><b>Order #</b></td>  
-                    <td scope="row">{{order.order_id}}</td>    
-                <tr>
-                </tr>
-                    <td><b>Date Ordered</b></td>
-                    <td>{{order.order_date}}</td>
-                <tr>
-                </tr>
-                    <td><b>Date Shipped</b></td>
-                    <td>{{order.shipped_date}}</td>
-                <tr>
-                </tr>
-                    <td><b>Customer</b></td>
-                    <td><a href="{% url 'customer' order.customer.pk %}">{{order.customer}}</a></td>
-                <tr>
-                </tr>
-                    <td><b>Employee</b></td>
-                    <td><a href="{% url 'employee' order.employee.pk %}">{{order.employee}}</a></td>
-                <tr>
-                </tr>
-                    <td><b>Shipper</b></td>
-                    <td>{{order.ship_via}}</td>
-                </tr>
-        </table> 
-    </div>
+<div class="row justify-content-center">
+    <div class="col-auto my-3">
+        <div class="card" style="width: 30rem;">
+            <table class="table">
+                    <tr>
+                        <td><b>Order #</b></td>  
+                        <td scope="row">{{order.order_id}}</td>    
+                    <tr>
+                    </tr>
+                        <td><b>Date Ordered</b></td>
+                        <td>{{order.order_date}}</td>
+                    <tr>
+                    </tr>
+                        <td><b>Date Shipped</b></td>
+                        <td>{{order.shipped_date}}</td>
+                    <tr>
+                    </tr>
+                        <td><b>Customer</b></td>
+                        <td><a href="{% url 'customer' order.customer.pk %}">{{order.customer}}</a></td>
+                    <tr>
+                    </tr>
+                        <td><b>Employee</b></td>
+                        <td><a href="{% url 'employee' order.employee.pk %}">{{order.employee}}</a></td>
+                    <tr>
+                    </tr>
+                        <td><b>Shipper</b></td>
+                        <td><a href="{% url 'shipper' order.ship_via.pk %}">{{order.ship_via}}</a></td>
+                    </tr>
+            </table> 
+        </div>
+    </div>  
 </div>
 
 {% endblock %}

@@ -31,7 +31,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{shipper.company_name}}</h5>
-                            <p class="card-text">{{shipper.phone}}</p>
+                            <a href="{% url 'shipper' shipper.shipper_id %}" class="btn btn-primary">More Info</a>
                             <div class="row mx-md-n5" >
                             </div>  
                         </div>

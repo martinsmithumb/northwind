@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Shipper
 from orders.models import Order
 from django.db.models import Count
@@ -59,3 +59,10 @@ def ship_populator(request):
         'shipper_ids':shipper_ids,
     }
     return render(request, 'shippers/ship_populator.html', context)
+
+def shipper(request, shipper_id):
+    shipper = get_object_or_404(Shipper, pk=shipper_id)
+    context = {
+        'shipper': shipper
+    }
+    return render(request, 'shippers/shipper.html', context)

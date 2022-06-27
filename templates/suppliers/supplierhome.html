@@ -2,36 +2,30 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %} | Welcome {% endblock %}
+{% block title %} | Suppliers {% endblock %}
 
 {% block content %}
-
-
-
 <div class="row justify-content-center">
     <div class="col-auto">
-      <table class="table table-responsive">
-        <tr>
-            {% if suppliers %}
-                {% for supplier in suppliers %}
+      <table class="table table-responsive">        
+          {% if suppliers %}
+              {% for supplier in suppliers %}
+                <tr>
                     <td>
                         <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{supplier.supplier_name}}</h5>
                             <p class="card-text">{{supplier.phone}}</p>
                             <div class="row mx-md-n5" >
+                              <a href="{% url 'supplier' supplier.supplier_id %}" class="btn btn-primary">More Info</a>
                             </div>  
                         </div>
                         </div>
                     </td> 
-                {% endfor %}
-            {% endif %}
-        </tr>
+                </tr>
+              {% endfor %}
+          {% endif %}        
       </table>
     </div>
   </div>
-
-
-
-
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Customer
 
 def customerhome(request):
@@ -7,3 +7,12 @@ def customerhome(request):
         'customers' : customers ,
     }
     return render(request, 'customers/customerhome.html', context)
+
+def customer(request, customer_id):
+  customer = get_object_or_404(Customer, pk=customer_id)
+
+  context = {
+    'customer': customer
+  }
+
+  return render(request, 'customers/customer.html', context)

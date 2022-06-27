@@ -2,38 +2,39 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %} | Orders {% endblock %}
+{% block title %} | Order: {{order.order_id}} {% endblock %}
 
 {% block content %}
 
-<div class="container-fluid mx-md" >
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Order #</th>            
-            <th scope="col">Order link</th>
-            <th scope="col">Date Ordered</th>
-            <th scope="col">Date Shipped</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Employee</th>
-            <th scope="col">Shipper</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for order in orders %}
-            <tr>
-                <th scope="row">{{order.order_id}}</th>                
-                <th>{{order.link | safe}}</th>
-                <td>{{order.order_date}}</td>
-                <td>{{order.shipped_date}}</td>
-                <td>{{order.customer}}</td>
-                <td>{{order.employee}}</td>
-                <td>{{order.ship_via}}</td>
-            </tr>
-        {% endfor %}
-        
-        </tbody>
-    </table>
+<div class="container-fluid mx-md center" >
+    <div class="card" style="width: 30rem;">
+        <table class="table">
+                <tr>
+                    <td><b>Order #</b></td>  
+                    <td scope="row">{{order.order_id}}</td>    
+                <tr>
+                </tr>
+                    <td><b>Date Ordered</b></td>
+                    <td>{{order.order_date}}</td>
+                <tr>
+                </tr>
+                    <td><b>Date Shipped</b></td>
+                    <td>{{order.shipped_date}}</td>
+                <tr>
+                </tr>
+                    <td><b>Customer</b></td>
+                    <td><a href="{% url 'customer' order.customer.pk %}">{{order.customer}}</a></td>
+                <tr>
+                </tr>
+                    <td><b>Employee</b></td>
+                    <td><a href="{% url 'employee' order.employee.pk %}">{{order.employee}}</a></td>
+                <tr>
+                </tr>
+                    <td><b>Shipper</b></td>
+                    <td>{{order.ship_via}}</td>
+                </tr>
+        </table> 
+    </div>
 </div>
 
 {% endblock %}

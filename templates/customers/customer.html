@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | {{customer.company_name}} {% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+          <table class="table table-responsive">
+            <tr>
+                <td>
+                    <div class="card" style="width: 30rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{customer.company_name}}</h3>                            
+                            <div class="row mx-md-n5" >
+                                <ul>
+                                    <li><b>Contact Name: </b>    {{customer.contact_name}}</li>
+                                    <li><b>Contact Title: </b>   {{customer.contact_title}}</li>
+                                    <li><b>Address: </b>         {{customer.address}}</li>
+                                    <li><b>City: </b>            {{customer.city}}</li>
+                                    <li><b>Region/State: </b>    {{customer.region}}</li>
+                                    <li><b>Zip/Postal Code: </b> {{customer.postal_code}}</li>
+                                    <li><b>Country: </b>         {{customer.country}}</li>
+                                    <li><b>Phone: </b>           {{customer.phone}}</li>
+                                    <li><b>Fax: </b>             {{customer.fax}}</li>
+                                </ul>                            
+                            </div>  
+                        </div>
+                    </div>
+                </td> 
+            </tr>
+          </table>
+        </div>
+      </div>
+
+{% endblock %}

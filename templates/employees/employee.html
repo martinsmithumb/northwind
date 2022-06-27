@@ -1,0 +1,76 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | {{employee.first_name}} {{employee.last_name}} {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mx-md center" >
+    <div class="card" style="width: 30rem;">
+        <table class="table">
+                <tr>
+                    <td><b>Employee id</b></td>  
+                    <td scope="row">{{employee.employee_id}}</td>    
+                <tr>
+                </tr>
+                    <td><b>Title</b></td>
+                    <td>{{employee.title}}</td>
+                <tr>
+                </tr>
+                    <td><b>Title of Courtesy</b></td>
+                    <td>{{employee.title_of_courtesy}}</td>
+                <tr>
+                </tr>
+                    <td><b>First Name</b></td>
+                    <td>{{employee.first_name}}</td>
+                <tr>
+                </tr>
+                    <td><b>Last Name</b></td>
+                    <td>{{employee.last_name}}</td>
+                <tr>    
+                </tr>
+                    <td><b>Birth Date</b></td>
+                    <td>{{employee.birth_date}}</td>
+                <tr>
+                </tr>
+                    <td><b>Hire Date</b></td>
+                    <td>{{employee.hire_date}}</td>
+                <tr>
+                </tr>
+                    <td><b>Address</b></td>
+                    <td>{{employee.address}}</td>
+                <tr>
+                </tr>
+                    <td><b>City</b></td>
+                    <td>{{employee.city}}</td>
+                <tr>
+                </tr>
+                    <td><b>Region</b></td>
+                    <td>{{employee.region}}</td>
+                <tr>
+                </tr>
+                    <td><b>Zip/Postal Code</b></td>
+                    <td>{{employee.postal_code}}</td>
+                <tr>
+                </tr>
+                    <td><b>Country</b></td>
+                    <td>{{employee.country}}</td>
+                <tr>
+                </tr>
+                    <td><b>Home Phone (ext.)</b></td>
+                    <td>{{employee.home_phone}}({{employee.extension}})</td>
+                <tr>
+                </tr>
+                    <td><b>Notes</b></td>
+                    <td>{{employee.notes}}</td>
+                <tr>
+                </tr>
+                    <td><b>Reports to</b></td>
+                    <td>{{employee.reports_to}}</td>
+                <tr>
+        </table> 
+    </div>
+</div>
+
+{% endblock %}

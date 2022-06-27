@@ -21,8 +21,11 @@ def orderhome(request):
     return render(request, 'orders/orderhome.html', context)
 
 def order(request, order_id):
-    order = get_object_or_404(Order, order_id=order_id)
-    return render(request, 'orders/order.html', {'order': order})
+    order = get_object_or_404(Order, pk=order_id)
+    context = {
+        'order': order
+    }
+    return render(request, 'orders/order.html', context)
 
 # def ordersdash(request):
 #     orders = Order.objects.all()

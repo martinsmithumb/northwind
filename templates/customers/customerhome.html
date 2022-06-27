@@ -8,23 +8,24 @@
 
     <div class="row justify-content-center">
         <div class="col-auto">
-          <table class="table table-responsive">
-            <tr>
+          <table class="table table-responsive">            
                 {% if customers %}
                     {% for customer in customers %}
+                    <tr>
                         <td>
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="card-title">{{customer.company_name}}</h5>
                                     <p class="card-text">{{customer.phone}}</p>
                                     <div class="row mx-md-n5" >
+                                    <a href="{% url 'customer' customer.customer_id %}" class="btn btn-primary">More Info</a>
                                     </div>  
                                 </div>
                             </div>
                         </td> 
+                    </tr>
                     {% endfor %}
                 {% endif %}
-            </tr>
           </table>
         </div>
       </div>

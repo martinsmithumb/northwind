@@ -6,4 +6,28 @@
 
 {% block content %}
 
+    <div class="row justify-content-center">
+        <div class="col-auto">
+          <table class="table table-responsive">            
+                {% if employees %}
+                    {% for employee in employees %}
+                    <tr>
+                        <td>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{employee.first_name}} {{employee.last_name}}</h5>
+                                    <p class="card-text">{{employee.title}}</p>
+                                    <div class="row mx-md-n5" >
+                                    <a href="{% url 'employee' employee.employee_id %}" class="btn btn-primary">More Info</a>
+                                    </div>  
+                                </div>
+                            </div>
+                        </td> 
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+          </table>
+        </div>
+      </div>
+
 {% endblock %}

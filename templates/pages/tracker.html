@@ -1,0 +1,61 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Tracker {% endblock %}
+
+{% block content %}
+
+
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <table class="table table-responsive">
+      <tr>
+      {% for country in countries %} 
+        <td>
+          <div class="card" style="width: 18rem;">
+            <div class ="center">
+              <h2>{{country}}</h2>
+            <div>
+            <div class="card-body">
+              <h5 class="card-title">Suppliers</h5>
+              <p class="card-text">
+                <ul>
+                {% for supplier in suppliers %}
+                  {% if supplier.country == country %}
+                    <li>{{supplier.supplier_name}}</li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+              </p>
+              <h5 class="card-title">Customers</h5>
+              <p class="card-text">
+                <ul>
+                {% for customer in customers %}
+                  {% if customer.country == country %}
+                    <li>{{customer.company_name}}</li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+              </p>
+              <h5 class="card-title">Employees</h5>
+              <p class="card-text">
+                <ul>
+                {% for employee in employees %}
+                  {% if employee.country == country %}
+                    <li>{{employee.first_name}} {{employee.last_name}}</li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+              </p>
+              <a href="{% url 'orderhome' %}" class="btn btn-primary">Details</a>
+            </div>
+          </div>
+        </td>      
+      {% endfor %}    
+    </tr>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

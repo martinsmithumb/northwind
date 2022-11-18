@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from orders.models import Order
 from shippers.models import Shipper
 from suppliers.models import Supplier
@@ -7,11 +7,21 @@ from products.models import Product
 from orders.models import Order
 from employees.models import Employee
 from django.db.models import Count, Avg
+from django.contrib import messages, auth
 import json
 from .data import countries
+# import environ
+
+# env = environ.Env()
+# env.read_env('./base/.env')
+
 def index(request):
     context = {}    
     return render(request, 'pages/index.html', context)
+
+def logout(request):
+    auth.logout(request)
+    return render(request, 'pages/index.html')
 
 def tracker(request):
     customers = Customer.objects.all()

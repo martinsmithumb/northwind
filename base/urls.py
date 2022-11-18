@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler403, handler404, handler500
 
 
 urlpatterns = [
@@ -16,3 +17,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 ]
+
+handler403 = 'base.views.error_403_view'
+handler404 = 'base.views.error_404_view'
+handler500 = 'base.views.error_500_view'

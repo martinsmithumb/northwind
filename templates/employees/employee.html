@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %} | {{employee.first_name}} {{employee.last_name}} {% endblock %}
+{% block title %} | {{employee}} {% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -66,8 +66,8 @@
                         <td>{{employee.notes}}</td>
                     </tr>
                     <tr>
-                        <td><b>Reports to</b></td>
-                        <td>{{employee.reports_to}}</td>
+                        <td><b>Reports to</b></td>            
+                        <td><a href="{% url 'employee' reports_to.pk %}">{{reports_to}}</a></td>
                     </tr>
             </table> 
         </div>

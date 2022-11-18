@@ -24,9 +24,9 @@
                 <th><a href="{% url 'order' order.order_id %}">{{order.order_id}}</a></th>
                 <td>{{order.order_date}}</td>
                 <td>{{order.shipped_date}}</td>
-                <td>{{order.customer}}</td>
-                <td>{{order.employee}}</td>
-                <td>{{order.ship_via}}</td>
+                <td><a href="{% url 'customer' order.customer.pk %}">{{order.customer}}</a></td>
+                <td><a href="{% url 'employee' order.employee.pk %}">{{order.employee}}</a></td>
+                <td><a href="{% url 'shipper' order.ship_via.pk %}">{{order.ship_via}}</a></td>
             </tr>
         {% endfor %}
         

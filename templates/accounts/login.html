@@ -3,14 +3,26 @@
 {% block title %} | Login {% endblock %}
 
 {% block content %}
+<br>
+<div class="mx-auto" style="width: 200px;">
 
-<form action="{% url 'login' %}" method="POST">
-    {% csrf_token %}
-    <h5 for="username">Username</h5>
-    <input type="text" name="username" class="form-control" required>
-    <h5>Password</h5>
-    <input type="password" name="password" class="form-control" required>
-    <input type="submit" value="Login">
-</form>
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <h5 for="usernameinput">Username</h5>
+        <input type="text" class="form-control" id="usernameinput" aria-describedby="usernameHelp" placeholder="Enter username" required>
+        <small id="usernameHelp" class="form-text text-muted">Usually your first name.</small>
+      </div>
+      <div class="form-group">
+        <h5 for="passwordinput">Password</h5>
+        <input type="password" name="password"   id="passwordinput" class="form-control"  placeholder="Password"required>
+      </div>
+      <button type="submit" value="Login" class="btn btn-primary">Login</button>
+    </form>
 
-  {% endblock %}
+</div>
+<br>
+
+
+
+{% endblock %}

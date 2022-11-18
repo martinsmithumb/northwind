@@ -7,4 +7,5 @@ urlpatterns = [
     path('tracker', views.tracker, name='tracker'),
     path('about', views.about, name='about'),
     path('chart', views.chart, name='chart'),
+    path('logout', views.logout, name='logout'),
 ]

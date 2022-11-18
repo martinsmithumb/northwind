@@ -37,52 +37,34 @@
             <a class="nav-link" href="{% url 'tracker' %}">Country Tracker</a>
           </li>
         </ul>
-
         <ul class="navbar-nav ml-auto">
-          {% if user.is_authenticated %}
-            <li
-            {% if 'dashboard' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-            >
-              <a class="nav-link" href="">
-               Welcome {{ user.username }} </a>
-            </li>
-            <li class="nav-item mr-3">
-              <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
-              <form action="" method="POST" id="logout">
-                {% csrf_token %}
-                <input type="hidden">
-              </form>
-            </li>
-          {% else %}
-            <li
-            {% if 'register' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-            >
-              <a class="nav-link" href="{% url 'register' %}">
-                <i class="fas fa-user-plus"></i> Register</a>
-            </li>
-            <li
-            {% if 'login' in request.path %}
-              class="nav-item active mr-3"
-            {% else %}
-              class="nav-item mr-3"
-            {% endif %}
-            >
-              <a class="nav-link" href="{% url 'login' %}">
-                <i class="fas fa-sign-in-alt"></i>
 
-                Login</a>
-            </li>
-          {% endif %}
+          <div class="dropdown">
+            <a class="btn btn-primary text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              {% if user.is_authenticated %}
+                {{ user.username }} 
+              {% else %}
+                  <a href="{% url 'register' %}"  class="text-white">
+                    <i class="fas fa-user-plus"></i> Register</a> &nbsp;
+                  <a href="{% url 'login' %}"  class="text-white">
+                    <i class="fas fa-sign-in-alt"></i>Login</a>
+              {% endif %}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a href="{% url 'orderhome' %}"    class="dropdown-item" href="#">Orders</a>
+              <a href="{% url 'supplierhome' %}" class="dropdown-item" href="#">Suppliers</a>
+              <a href="{% url 'customerhome' %}" class="dropdown-item" href="#">Customers</a>
+              <a href="{% url 'producthome' %}"  class="dropdown-item" href="#">Products</a>
+              <a href="{% url 'shipperhome' %}"  class="dropdown-item" href="#">Shippers</a>
+              <a href="{% url 'employeehome' %}" class="dropdown-item" href="#">Employees</a>
+              {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="dropdown-item"><i class="fas fa-sign-out-alt"></i>Logout</a>    
+              {% else %}  
+              {% endif %}          
+            </div>
+          </div>
+
+
         </ul>
       </div>
     </div>

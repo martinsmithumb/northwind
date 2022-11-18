@@ -16,7 +16,7 @@ class Employee(models.Model):
     home_phone = models.CharField(max_length=24, null=True)
     extension = models.CharField(max_length=4, null=True)
     photo = models.CharField(max_length=10, null=True)
-    notes = models.CharField(max_length=200, null=True)
+    notes = models.TextField(null=True)
     reports_to = models.IntegerField(null = True)
     photo_path = models.CharField(max_length=255, null=True)
     def __str__(self):

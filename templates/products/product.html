@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td><b>Supplier</b></td>
-                    <td>{{product.supplier}}</td>
+                    <td><a href="{% url 'supplier' product.supplier.pk %}">{{product.supplier}}</a></td>
                 </tr>
                 <tr>
                     <td><b>Last updated</b></td>

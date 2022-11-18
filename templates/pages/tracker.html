@@ -9,10 +9,9 @@
 
 <div class="row justify-content-center">
   <div class="col-auto">
-    <table class="table table-responsive">
-      <tr>
+    <div class="h-100 d-flex flex-column justify-content-center align-items-center">
       {% for country in countries %} 
-        <td>
+        <h3 class="badge bg-primary">
           <div class="card" style="width: 18rem;">
             <div class ="center">
               <h2>{{country}}</h2>
@@ -51,10 +50,10 @@
               <a href="{% url 'orderhome' %}" class="btn btn-primary">Details</a>
             </div>
           </div>
-        </td>      
-      {% endfor %}    
-    </tr>
-    </table>
+        </td>  
+      </h3>    
+      {% endfor %}   
+    </div> 
   </div>
 </div>
 

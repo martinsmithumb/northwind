@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | About {% endblock %}
+
+{% block content %}
+<div class="bg-white border rounded-5">
+    <section class="w-100 p-4 text-center pb-4">  
+        <img src="{% static 'img/logo.png' %}" class="logo" alt=""> 
+        <H1> Northwind Example Website</H1>
+        <h5>
+            <i>
+                <p>This website is created based on the Northwind Example database as an example company.</p>
+            </i>
+        </h5>
+        </section>
+</div>
+{% endblock %}

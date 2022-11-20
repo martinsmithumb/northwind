@@ -24,26 +24,6 @@ def shipperhome(request):
     }
     return render(request, 'shippers/shipperhome.html', context)
 
-def shipperold(request):
-    shippers = Shipper.objects.all()
-    names = []
-    for shipper in shippers:
-        names.append(str(shipper))
-
-    orders = Order.objects.values('ship_via').annotate(num=Count('customer_id')) 
-
-    counts = []
-    for item in orders:
-        counts.append(item['num'])
-
-    context = {
-        'shippers': shippers,
-        'names': names,
-        'counts': counts,
-    }
-    return render(request, 'shippers/shipperold.html', context)
-
-
 def ship_populator(request):
     shippers = Shipper.objects.all()
     shipper_ids = []

@@ -5,27 +5,27 @@
 {% block title %} | Suppliers {% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-auto">
-      <table class="table table-responsive">        
+    <!-- Sourced flexbox code from https://mdbootstrap.com/docs/standard/layout/flexbox/ -->
+    <div class="bg-white border rounded-5">
+      <section class="w-100 p-4 text-center pb-4">            
+          <div class="d-flex flex-wrap bg-light">     
           {% if suppliers %}
               {% for supplier in suppliers %}
-                <tr>
-                    <td>
-                        <div class="card" style="width: 18rem;">
+                <div class="p-2 col-example">
+                    <div class="card" style="width: 18rem;">
                         <div class="card-body">
+                          <div style="height: 12rem;">
+                            <img class="card-img-top" src="{% static 'img/placeholder.png' %}" alt="Card image cap">
+                          </div>
                             <h5 class="card-title">{{supplier.supplier_name}}</h5>
                             <p class="card-text">{{supplier.phone}}</p>
-                            <div class="row mx-md-n5" >
-                              <a href="{% url 'supplier' supplier.supplier_id %}" class="btn btn-primary">More Info</a>
-                            </div>  
+                            <a href="{% url 'supplier' supplier.supplier_id %}" class="btn btn-primary">More Info</a>
                         </div>
-                        </div>
-                    </td> 
-                </tr>
+                    </div>
+                </div>
               {% endfor %}
           {% endif %}        
-      </table>
+        </div>
+      </section>
     </div>
-  </div>
 {% endblock %}

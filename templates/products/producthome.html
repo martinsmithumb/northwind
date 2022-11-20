@@ -5,27 +5,27 @@
 {% block title %} | Products {% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-auto">
-      <table class="table table-responsive">        
+    <!-- Sourced flexbox code from https://mdbootstrap.com/docs/standard/layout/flexbox/ -->
+    <div class="bg-white border rounded-5">
+      <section class="w-100 p-4 text-center pb-4">            
+          <div class="d-flex flex-wrap bg-light">    
           {% if products %}
               {% for product in products %}
-                <tr>
-                    <td>
-                        <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{product.product_name}}</h5>
-                            <p class="card-text">{{product.category}}</p>
-                            <div class="row mx-md-n5" >
-                              <a href="{% url 'product' product.product_id %}" class="btn btn-primary">More Info</a>
-                            </div>  
-                        </div>
-                        </div>
-                    </td> 
-                </tr>
+                <div class="p-2 col-example">
+                    <div class="card" style="width: 18rem;">
+                      <div class="card-body">
+                          <div style="height: 12rem;">
+                            <img class="card-img-top" src="{% static 'img/placeholder.png' %}" alt="Card image cap">
+                          </div>
+                          <h5 class="card-title">{{product.product_name}}</h5>
+                          <p class="card-text">{{product.category}}</p>
+                          <a href="{% url 'product' product.product_id %}" class="btn btn-primary">More Info</a>
+                      </div>
+                    </div>
+                </div>
               {% endfor %}
           {% endif %}        
-      </table>
-    </div>
+        </div>
+      </section>
   </div>
 {% endblock %}

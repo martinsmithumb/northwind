@@ -1,0 +1,173 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Orders {% endblock %}
+
+{% block content %}
+
+{% block pagescripts %}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+<style>
+    .dataTables_filter, dataTables_info {display: none;}
+    .dot-pulse {
+        position: relative;
+        left: -9999px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #9880ff;
+        animation: dotpulse 1.5s infinite linear;
+        animation-delay: .25s;
+    }
+</style>
+<script>
+    /* This code block allows for global filtering and is called in the document ready statement
+    below. It will search for a text string across all columns in a table. Displayed in the html
+    you can choose to search via smart search or regex*/
+    function filterColumn0() {
+        $('#order_table')
+        .DataTable()
+        .column(0)
+        .search(
+            $('#col0_filter').val(),
+            $('#col0_regex').prop('checked'),
+            $('#col0_smart').prop('checked'),
+        )
+        .draw();
+    }
+    function filterColumn1() {
+        $('#order_table')
+        .DataTable()
+        .column(1)
+        .search(
+            $('#col1_filter').val(),
+            $('#col1_regex').prop('checked'),
+            $('#col1_smart').prop('checked'),
+        )
+        .draw();
+    }
+
+    $(document).ready(function(){
+        /*Since the table can only intialized once when done on a server. The if Statement
+        checks to see if this has already been done and runs the nested functions so that 
+        they don't try to reintialize a new table*/
+        if ($.fn.dataTable.isDataTable('#order_table')){
+            table = $('#order_table').DataTable();
+        }
+        else {
+            table = $('#order_table').DataTable({
+                "processing": true,
+                "serverside": true,
+                "ajax": "/orders/api/orders/?format=datatables",
+                "language": {
+                    processing: "Loading .."},
+                "order": [[0,"asc"],[3, "desc"]],
+                "iDisplayLength": 15,
+                "lengthMenu": [[10,15,20,25,50,100,500,1000],[10,15,20,25,50,100,500,"Max"]],
+                dom: '<"top"l>rt<"bottom"fip><"clear">',
+                "paging": true,
+                "createdRow": function(row, data, dataIndex){
+                    if (data.is_proc_code_termed === true) {
+                        $(row).addClass('gls-text-primary gls-text-semibold');
+                    }
+                },
+                "rowCallback": function (row, data, displayNum, displayIndex, dataIndex){
+                    if (data.is_proc_code_termed === true) {
+                        $(row).attr("gls-tooltip", "title: termination Date: " + data.eff_to_date + "; pos: top-right")
+                    }
+                },
+                /*This columns section allows you to run functions formats transformations etc on a per column basis */
+                "columns": [
+                    {
+                        "data": "order_id",
+                        "visible": true,
+                        "className": 'gls-text-middle'
+                    },
+                    {
+                        "data": "order_date",
+                        "className": 'gls-text-middle',
+                    },
+                    {
+                        "data": "shipped_date",
+                        "visible" : false
+                    },
+                    {
+                        "data": "order_id",
+                        "render" : function(data) {
+                            return `<div class="gls-flex gls-flex-middle gls-text-center">
+                                        <span style="display:inline-block">${(data / 100).toFixed(2)}%&nbsp</span>
+                                        <progress class="gls-progress" value=${(data / 100).toFixed(2)} max="100"></progress>
+                                    </div>`;
+                        },
+                    },
+                    {
+                        "data": "customer",
+                        "visible": true,
+                        "className": 'gls-text-middle',
+                        "orderable": true,
+                        //"render": function(data) {
+                        //    if (data == 1) {
+                        //        return "<i class=\"fa-solid fa-triangle-exclamation\"></i>";
+                        //    }
+                        //    if (data == 0) {
+                        //        return "<i class=\"fa-solid fa-circle-check\"></i>";
+                        //    }
+                        //}
+                    },
+                    {
+                        "data": "employee",
+                        "className": 'gls-text-middle',
+                        "visible": false
+                    }
+                ] /*End columns statement*/
+            });
+        }
+
+        $('#order_table_wrapper').hide();
+
+        $('input.global_filter').on('keyup click', function() {
+            filterGlobal();
+        });
+
+        $('input.column_filter').on('keyup', function() {
+            if($('#col0_filter').val() || $('#col1_filter').val()) {
+                filterColumn0($(this).parents('div').attr('data-column'));
+                filterColumn1($(this).parents('div').attr('data-column'));
+                $('#order_table_wrapper').show();
+                $('#message_div').hide();
+            } else {
+                $('#order_table_wrapper').hide();
+                $("#message_div").show();
+            }
+        });
+    });
+
+</script>
+{% endblock %}  
+
+
+<div class="container-fluid mx-md">
+    <div id="table_div" >
+        <table class="table table-striped" id="order_table">
+            <thead>
+                <tr>
+                    <th data-data="order_id" scope="col">Order ID</th>
+                    <th data-data="order_date" scope="col">Date Ordered</th>
+                    <th data-data="shipped_date" scope="col">Date Shipped</th>
+                    <th data-data="customer" scope="col">Customer</th>
+                    <th data-data="employee" scope="col">Employee</th>
+                    <th data-data="ship_via" scope="col">Shipper</th>
+                </tr>
+            </thead>
+            <body></body>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

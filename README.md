@@ -2,7 +2,7 @@
 Northwind database converted to a website with visualizations
 # To recreate database
 
-1. Running the scripts below will delete all the chache and migrations folders, the db.sqlite3 file, create migrations, and then migrate.
+1. Running the scripts below will delete all the cache and migrations folders, the db.sqlite3 file, create migrations, and then migrate.
    rmdir /s /q "orders/__pycache__"
    rmdir /s /q "orders/migrations"
    rmdir /s /q "customers/__pycache__"

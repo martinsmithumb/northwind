@@ -1,0 +1,12 @@
+
+{% extends 'base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Orders {% endblock %}
+
+{% block content %}
+{% load render_table from django_tables2 %}
+{% render_table table %}
+
+{% endblock %}

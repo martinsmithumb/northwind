@@ -14,12 +14,39 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Lightbox -->
     <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
-
+    <!-- Django_Tables2 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'django_tables2/themes/bootstrap4.css' %}">
+    
     <title>NorthWind {% block title %}{% endblock %}</title>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
+    <script src="{% static 'js/lightbox.min.js' %} "></script>
+    <script src="{% static 'js/main.js' %} "></script>
+
+    <!-- DataTables.net -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script> // this should be delivered via CDN cdn.jsdelivr.net/gh/... later
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("table.umb-sort-table").forEach( elem => {
+          new DataTable(elem, {
+            //Remove pagination
+            paging: false,
+            // Remove table informatoin at bottom
+            "info": false,
+            "searching": false
+          })
+        })
+      })
+    </script>
+
+
+
   </head>
 
   <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Top Bar -->
     {% include 'partials/_topbar.html' %}
@@ -29,14 +56,16 @@
     {% block content %} {% endblock %}
     <!-- Footer -->
     {% include 'partials/_footer.html' %}
-    
-    <!-- JQuery -->
+    <!-- Scripts -->
+    {% block pagescripts %}{% endblock %} 
     
 
-    <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %} "></script>
-    <script src="{% static 'js/lightbox.min.js' %} "></script>
-    <script src="{% static 'js/main.js' %} "></script>
+    <script> 
+      //This is likely not needed until production
+      document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+      })
+    </script>
   </body>
 
 </html>
